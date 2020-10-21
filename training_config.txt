@@ -1,0 +1,16 @@
+#this handles all config for simulation (traci)
+[simulation]
+gui=False,max_steps=5000,nb_cars_generated=1000,total_episodes=100,green_duration=20,yellow_duration=4,red_duration=4
+
+#topology of NN
+[neural_network]
+nb_hidden_layers=1,width_layers=56,learning_rate=0.001,batch_size=100,epochs=500
+
+[memory]
+size=10000
+
+[agent]
+nb_states=80,nb_actions=4,discount_rate=0.6
+
+[utils]
+folder_to_save=models
