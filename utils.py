@@ -1,3 +1,8 @@
+import sys
+import os
+from os import path
+from sumolib import checkBinary
+
 """
 Functions to split headers and data from file and add result to nested dict. 
 Example of file is given below:
@@ -9,6 +14,8 @@ Afterwards, data must be split by ',' then '=' characters.
 
 data[0] => config1
 data[1] => 'sometext'
+
+Returns nested dict config following the model [key][key][value].
 """        
 def read_config(text_file):
     try:
@@ -38,3 +45,27 @@ def config_split(file):
             data.append(row)
     #filter is used just to remove blank lines amongst list
     return headers, filter(None, data)
+
+"""
+Function to configure TraCI.
+Firstly it's needed to check if SUMO_HOME is in system path.
+Then, we set GUI according to config file.
+
+Returns TraCI config.
+"""
+def sumo_config(gui, time_steps):
+    #check if var is set, otherwise application won't run
+    if 'SUMO_HOME' in os.environ:
+        tools = path.join(os.environ['SUMO_HOME'], 'tools')
+        sys.path.append(tools)
+    else:
+        sys.exit('Please declare environment variable "SUMO_HOME"')
+        
+    #check if using GUI, not necessarily needed after SUMO 0.28.0
+    if gui:
+        sumoBinary = checkBinary('sumo-gui')
+    else:
+        sumoBinary = checkBinary('sumo')        
+        
+    return [sumoBinary, '-c', 'data/sumo_config.sumocfg', '--no-step-log', 'true', 
+            '--waiting-time-memory', time_steps]

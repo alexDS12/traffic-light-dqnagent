@@ -10,7 +10,7 @@ nb_hidden_layers=1,width_layers=56,learning_rate=0.001,batch_size=100,epochs=500
 size=10000
 
 [agent]
-nb_states=80,nb_actions=4,discount_rate=0.6
+nb_states=80,nb_actions=3,discount_rate=0.6
 
 [utils]
 folder_to_save=models

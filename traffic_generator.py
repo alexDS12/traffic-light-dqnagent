@@ -21,7 +21,7 @@ class TrafficGenerator(object):
         self.time_steps = time_steps
         
     def generate_routefile(self):
-        np.random.seed(42)
+        np.random.seed()
         
         #Generating random departures
         departures = np.sort([np.random.randint(1, self.time_steps) for _ in range(self.nb_vehicles)])
