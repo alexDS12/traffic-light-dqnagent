@@ -1,4 +1,5 @@
 import numpy as np
+import random
 from os import path
 import sys
 import random
@@ -42,8 +43,8 @@ class Network(object):
         
     """
     def __init__(self, nb_states, nb_actions, nb_hidden_layers, width_layers, learning_rate):
-        self.input_size = nb_states
-        self.output_size = nb_actions
+        self.nb_states = nb_states
+        self.nb_actions = nb_actions
         self.nb_hidden_layers = nb_hidden_layers
         self.width_layers = width_layers
         self.learning_rate = learning_rate
@@ -51,11 +52,11 @@ class Network(object):
     
     def build_model(self):
         model = Sequential()
-        model.add(Dense(units=self.width_layers, input_dim=self.input_size, activation='relu', name='hidden0'))        
+        model.add(Dense(units=self.width_layers, input_dim=self.nb_states, activation='relu', name='hidden0'))        
         for i in range(self.nb_hidden_layers-1):
             model.add(Dense(units=self.width_layers, activation='relu', name='hidden{}'.format(i+1)))
             
-        model.add(Dense(units=self.output_size, activation='linear', name='output'))
+        model.add(Dense(units=self.nb_actions, activation='linear', name='output'))
         model.compile(optimizer=Adam(learning_rate=self.learning_rate), loss='mean_squared_error')
         return model
     
@@ -85,8 +86,8 @@ class Memory(object):
     add_sample(sample):
         Stores a new sample into memory, if it's full, oldest memory is removed.
     get_sample(batch_size):
-        Gets N random samples from memory, if batch size is bigger than actual size, 
-        it returns all memory scrambled.
+        Gets N random samples from memory, grouping same variables in one tuple.
+        E.g. (state0, state1, ...) (action0, action1, ...)
     """
     def __init__(self, size):
         self.size = size
@@ -98,9 +99,7 @@ class Memory(object):
             del self.memory[0]
     
     def get_sample(self, batch_size):
-        if batch_size > self.size:
-            return np.random.choice(self.memory, self.size)        
-        return np.random.choice(self.memory, batch_size, replace=False)
+        return zip(*random.sample(self.memory, batch_size))
     
 class DQNAgent(object):
     """
@@ -109,7 +108,7 @@ class DQNAgent(object):
     Attributes
     ----------
     nb_actions : int
-        The number of possible actions agent can be take.
+        The number of possible actions agent can take.
     gamma : int
         Discount rate for every action agent takes.
     batch_size : int
@@ -123,8 +122,6 @@ class DQNAgent(object):
     
     Methods
     -------
-    save_tomemory(sample):
-        Sends a sample to store in memory.
     select_action(state):
         Randomizes an int [0, 1] to decide whether
         next action is gonna be exploration or exploitation.
@@ -133,16 +130,22 @@ class DQNAgent(object):
     _load_model(model_path):
         Checks whether model exists and loads it, otherwise an error is given.
     """
-    def __init__(self, nb_actions, model, memory_size, gamma, batch_size, epochs):
-        self.nb_actions = nb_actions
+    def __init__(self, nn, memory_size, gamma, batch_size, epochs):
+        self.nn = nn        
+        self.memory = Memory(memory_size)
         self.gamma = gamma
         self.batch_size = batch_size
-        self.epochs = epochs
-        self.nn = model
-        self.memory = Memory(memory_size)
+        self.epochs = epochs        
+        self.nb_actions = self.nn.nb_actions
         
-    def save_tomemory(self, sample):
-        self.memory.add_sample(sample)        
+    def experience_replay(self):
+        for _ in range(1):
+            batch_last_state, batch_next_state, batch_action, batch_reward = self.memory.get_sample(self.batch_size)
+            print(type(batch_last_state))
+            #q_values = self.nn.predict_batch(np.array(batch_last_state))
+            #next_q_values = self.nn.predict_batch(np.array(batch_next_state))  
+            print('q_values')
+            #print(q_values)
     
     def select_action(self, state, epsilon):
         #exploitation
