@@ -23,16 +23,9 @@ def main():
                      gamma       = float(config['agent']['discount_rate']),
                      memory_size = int(config['memory']['size']),                                       
                      epochs      = int(config['neural_network']['epochs']),
-                     batch_size  = int(config['neural_network']['batch_size']))
-    
-    
-    for _ in range(10000):
-        agent.memory.add_sample((1, 2, 3, 4))
-    
-    agent.experience_replay()
-        
+                     batch_size  = int(config['neural_network']['batch_size']))  
+                
     simulation = Simulation(agent, sumo_cfg, int(config['simulation']['max_steps']))
-    simulation.get_state()
     
     for epoch in range(int(config['simulation']['total_episodes'])):
         print('Starting simulation - Episode: {}/{}'.format(epoch+1, config['simulation']['total_episodes']))

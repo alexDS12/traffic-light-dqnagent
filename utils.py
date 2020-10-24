@@ -15,7 +15,11 @@ Afterwards, data must be split by ',' then '=' characters.
 data[0] => config1
 data[1] => 'sometext'
 
-Returns nested dict config following the model [key][key][value].
+Arguments:
+    text_file : file
+
+Returns:
+    Nested dict config following the model [key][key][value].
 """        
 def read_config(text_file):
     try:
@@ -51,7 +55,13 @@ Function to configure TraCI.
 Firstly it's needed to check if SUMO_HOME is in system path.
 Then, we set GUI according to config file.
 
-Returns TraCI config.
+Arguments:
+    gui : boolean
+        Whether to display SUMO or not.
+    time_steps : int
+        
+Returns:
+    TraCI config.
 """
 def sumo_config(gui, time_steps):
     #check if var is set, otherwise application won't run

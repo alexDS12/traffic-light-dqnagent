@@ -2,7 +2,6 @@ import numpy as np
 import random
 from os import path
 import sys
-import random
 from keras.layers import Dense
 from keras.models import Sequential, save_model, load_model
 from keras.optimizers import Adam
@@ -15,9 +14,9 @@ class Network(object):
     
     Attributes
     ----------
-    input_size : int
+    nb_states : int
         The number of possible states agent can be at.
-    output_size : int
+    nb_actions : int
         The number of possible actions agent can take.
     nb_hidden_layers : int
         Quantity of hidden layers NN will have.
@@ -37,10 +36,7 @@ class Network(object):
     predict_batch(states):
         Predicts N actions giving N states.
     train_batch(states, q_values):
-        Trains NN fitting states as input and q_values as output.
-    save(model_path):
-        Saves model after there is no training left.
-        
+        Trains NN fitting states as input and q_values as output.        
     """
     def __init__(self, nb_states, nb_actions, nb_hidden_layers, width_layers, learning_rate):
         self.nb_states = nb_states
@@ -77,7 +73,7 @@ class Memory(object):
     Attributes
     ----------
     size : int
-        The number of samples our agent's memory can hold.
+        The number of samples agent's memory can hold.
     memory : list
         A list of samples stored in memory.
         
@@ -87,7 +83,7 @@ class Memory(object):
         Stores a new sample into memory, if it's full, oldest memory is removed.
     get_sample(batch_size):
         Gets N random samples from memory, grouping same variables in one tuple.
-        E.g. (state0, state1, ...) (action0, action1, ...)
+        E.g. (state0, state1, ...) (action0, action1, ...) and returns list ([states], [actions], ...)
     """
     def __init__(self, size):
         self.size = size
@@ -99,7 +95,8 @@ class Memory(object):
             del self.memory[0]
     
     def get_sample(self, batch_size):
-        return zip(*random.sample(self.memory, batch_size))
+        sample = zip(*random.sample(self.memory, batch_size))
+        return [item for item in sample]
     
 class DQNAgent(object):
     """
@@ -107,23 +104,26 @@ class DQNAgent(object):
     
     Attributes
     ----------
-    nb_actions : int
-        The number of possible actions agent can take.
+    nn : Network
+        Agent's NN.
+    memory : Memory
+        Agent's memory.
     gamma : int
         Discount rate for every action agent takes.
     batch_size : int
         Quantity of actions to train NN.
     epochs : int
         Quantity of times a training session will run.
-    nn : Network
-        Agent's NN.
-    memory : Memory
-        Agent's memory.
+    nb_actions : int
+        The number of possible actions agent can take.
     
     Methods
     -------
+    experience_replay():
+        At the end of every epoch, NN is trained adjusting its weights to
+        improve agent's decisions.
     select_action(state):
-        Randomizes an int [0, 1] to decide whether
+        Randomizes an int in [0, 1] to decide whether
         next action is gonna be exploration or exploitation.
     _save_model(model_path):
         Uses built function to save NN's model in an unique dir.

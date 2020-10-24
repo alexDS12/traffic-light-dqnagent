@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 10/23/20 21:26:04 by Eclipse SUMO netedit Version 1.7.0
+<!-- generated on 10/24/20 14:28:44 by Eclipse SUMO netedit Version 1.7.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
 
     <input>
@@ -41,30 +41,25 @@
     <location netOffset="0.00,0.00" convBoundary="-100.00,-70.00,100.00,50.00" origBoundary="-10000000000.00,-10000000000.00,10000000000.00,10000000000.00" projParameter="!"/>
 
     <edge id=":center_0" function="internal">
-        <lane id=":center_0_0" index="0" disallow="pedestrian" speed="7.03" length="11.52" shape="13.54,9.39 9.72,9.37 6.98,10.18 5.35,11.82 4.80,14.29"/>
+        <lane id=":center_0_0" index="0" disallow="pedestrian" speed="7.82" length="14.53" shape="13.54,9.39 8.32,9.25 4.58,10.02 2.35,11.70 1.60,14.29"/>
     </edge>
     <edge id=":center_1" function="internal">
-        <lane id=":center_1_0" index="0" disallow="pedestrian" speed="7.82" length="14.53" shape="13.54,9.39 8.32,9.25 4.58,10.02 2.35,11.70 1.60,14.29"/>
+        <lane id=":center_1_0" index="0" disallow="pedestrian" speed="13.89" length="17.94" shape="13.55,6.18 8.31,5.54 4.71,5.05 1.11,4.89 -4.14,5.24"/>
+        <lane id=":center_1_1" index="1" disallow="pedestrian" speed="13.89" length="17.94" shape="13.56,2.96 8.23,2.32 4.56,1.84 0.89,1.69 -4.45,2.05"/>
     </edge>
-    <edge id=":center_2" function="internal">
-        <lane id=":center_2_0" index="0" disallow="pedestrian" speed="13.89" length="17.94" shape="13.55,6.18 8.31,5.54 4.71,5.05 1.11,4.89 -4.14,5.24"/>
-        <lane id=":center_2_1" index="1" disallow="pedestrian" speed="13.89" length="17.94" shape="13.56,2.96 8.23,2.32 4.56,1.84 0.89,1.69 -4.45,2.05"/>
+    <edge id=":center_3" function="internal">
+        <lane id=":center_3_0" index="0" disallow="pedestrian" speed="7.32" length="11.71" shape="8.00,-10.40 8.35,-6.55 9.40,-3.80 11.14,-2.15 13.58,-1.60"/>
     </edge>
     <edge id=":center_4" function="internal">
-        <lane id=":center_4_0" index="0" disallow="pedestrian" speed="6.51" length="9.03" shape="8.00,-10.40 8.35,-7.95 9.40,-6.20 11.15,-5.15 13.59,-4.80"/>
-    </edge>
-    <edge id=":center_5" function="internal">
-        <lane id=":center_5_0" index="0" disallow="pedestrian" speed="7.32" length="11.71" shape="8.00,-10.40 8.35,-6.55 9.40,-3.80 11.14,-2.15 13.58,-1.60"/>
+        <lane id=":center_4_0" index="0" disallow="pedestrian" speed="13.89" length="24.82" shape="4.80,-10.40 4.80,14.29"/>
+        <lane id=":center_4_1" index="1" disallow="pedestrian" speed="13.89" length="24.82" shape="4.80,-10.40 4.30,-2.70 3.20,2.86 2.10,7.96 1.60,14.29"/>
     </edge>
     <edge id=":center_6" function="internal">
-        <lane id=":center_6_0" index="0" disallow="pedestrian" speed="13.89" length="24.95" shape="4.80,-10.40 4.30,-2.70 3.20,2.86 2.10,7.96 1.60,14.29"/>
+        <lane id=":center_6_0" index="0" disallow="pedestrian" speed="9.25" length="17.85" shape="1.60,-10.40 1.24,-3.77 0.17,1.04 -1.63,4.05 -4.14,5.24"/>
     </edge>
     <edge id=":center_7" function="internal">
-        <lane id=":center_7_0" index="0" disallow="pedestrian" speed="9.25" length="17.85" shape="1.60,-10.40 1.24,-3.77 0.17,1.04 -1.63,4.05 -4.14,5.24"/>
-    </edge>
-    <edge id=":center_8" function="internal">
-        <lane id=":center_8_0" index="0" disallow="pedestrian" speed="13.89" length="18.55" shape="-5.12,-4.80 13.59,-4.80"/>
-        <lane id=":center_8_1" index="1" disallow="pedestrian" speed="13.89" length="18.55" shape="-4.81,-1.60 13.58,-1.60"/>
+        <lane id=":center_7_0" index="0" disallow="pedestrian" speed="13.89" length="18.55" shape="-5.12,-4.80 13.59,-4.80"/>
+        <lane id=":center_7_1" index="1" disallow="pedestrian" speed="13.89" length="18.55" shape="-4.81,-1.60 13.58,-1.60"/>
     </edge>
 
     <edge id="BC" from="bot_center" to="center" priority="-1" length="100.00">
@@ -93,61 +88,50 @@
         <lane id="TR_1" index="1" disallow="pedestrian" speed="13.89" length="100.00" shape="99.52,14.78 13.55,6.18"/>
         <lane id="TR_2" index="2" disallow="pedestrian" speed="13.89" length="100.00" shape="99.84,11.59 13.56,2.96"/>
     </edge>
-    <edge id="footway_crossing" from="pedestrian_top" to="pedestrian_bot" priority="46">
-        <lane id="footway_crossing_0" index="0" allow="pedestrian" speed="13.89" length="29.36" shape="57.98,19.18 58.43,-10.18"/>
-        <lane id="footway_crossing_1" index="1" allow="pedestrian" speed="13.89" length="29.36" shape="61.18,19.23 61.63,-10.13"/>
-    </edge>
 
     <tlLogic id="center" type="static" programID="0" offset="0">
-        <phase duration="30" state="GGGGGGrrrr"/>
-        <phase duration="3"  state="yyyyGGrrrr"/>
-        <phase duration="30" state="rrrrGGGGrr"/>
-        <phase duration="3"  state="rrrryyyyrr"/>
-        <phase duration="30" state="GGGGrrrrGG"/>
-        <phase duration="3"  state="yyyyrrrryy"/>
+        <phase duration="27" state="GGGrrrrGG"/>
+        <phase duration="3"  state="yyyrrrryy"/>
+        <phase duration="27" state="rrrGGGGrr"/>
+        <phase duration="3"  state="rrryyyyrr"/>
     </tlLogic>
 
     <junction id="bot_center" type="dead_end" x="0.00" y="-70.00" incLanes="" intLanes="" shape="0.00,-70.00 9.60,-70.00"/>
     <junction id="bot_left" type="dead_end" x="-100.00" y="0.00" incLanes="" intLanes="" shape="-100.00,0.00 -100.00,-6.40"/>
     <junction id="bot_right" type="dead_end" x="100.00" y="0.00" incLanes="BR_0 BR_1" intLanes="" shape="100.00,-6.40 100.00,0.00"/>
-    <junction id="center" type="traffic_light" x="0.00" y="0.00" incLanes="TR_0 TR_1 TR_2 BC_0 BC_1 BC_2 BL_0 BL_1" intLanes=":center_0_0 :center_1_0 :center_2_0 :center_2_1 :center_4_0 :center_5_0 :center_6_0 :center_7_0 :center_8_0 :center_8_1" shape="0.00,14.29 6.40,14.29 7.19,12.14 8.18,11.47 9.57,11.05 11.35,10.89 13.53,11.00 13.60,-6.40 11.38,-6.84 10.60,-7.40 10.04,-8.18 9.71,-9.18 9.60,-10.40 0.00,-10.40 -0.59,-8.18 -1.32,-7.40 -2.35,-6.84 -3.67,-6.51 -5.28,-6.40 -3.98,6.83 -1.77,7.48 -1.00,8.50 -0.44,9.97 -0.11,11.90">
-        <request index="0" response="0000000000" foes="0001000000" cont="0"/>
-        <request index="1" response="0000000000" foes="0001000000" cont="0"/>
-        <request index="2" response="0000000000" foes="0011000000" cont="0"/>
-        <request index="3" response="0000000000" foes="0011000000" cont="0"/>
-        <request index="4" response="0000000000" foes="1100000000" cont="0"/>
-        <request index="5" response="0000000000" foes="1100000000" cont="0"/>
-        <request index="6" response="0000001111" foes="1100001111" cont="0"/>
-        <request index="7" response="0000001100" foes="1100001100" cont="0"/>
-        <request index="8" response="0011110000" foes="0011110000" cont="0"/>
-        <request index="9" response="0011110000" foes="0011110000" cont="0"/>
+    <junction id="center" type="traffic_light" x="0.00" y="0.00" incLanes="TR_0 TR_1 TR_2 BC_0 BC_1 BC_2 BL_0 BL_1" intLanes=":center_0_0 :center_1_0 :center_1_1 :center_3_0 :center_4_0 :center_4_1 :center_6_0 :center_7_0 :center_7_1" shape="0.00,14.29 6.40,14.29 7.19,12.14 8.18,11.47 9.57,11.05 11.35,10.89 13.53,11.00 13.60,-6.40 11.38,-6.84 10.60,-7.40 10.04,-8.18 9.71,-9.18 9.60,-10.40 0.00,-10.40 -0.59,-8.18 -1.32,-7.40 -2.35,-6.84 -3.67,-6.51 -5.28,-6.40 -3.98,6.83 -1.77,7.48 -1.00,8.50 -0.44,9.97 -0.11,11.90">
+        <request index="0" response="000000000" foes="000110000" cont="0"/>
+        <request index="1" response="000000000" foes="001110000" cont="0"/>
+        <request index="2" response="000000000" foes="001110000" cont="0"/>
+        <request index="3" response="000000000" foes="110000000" cont="0"/>
+        <request index="4" response="000000111" foes="110000111" cont="0"/>
+        <request index="5" response="000000111" foes="110000111" cont="0"/>
+        <request index="6" response="000000110" foes="110000110" cont="0"/>
+        <request index="7" response="001111000" foes="001111000" cont="0"/>
+        <request index="8" response="001111000" foes="001111000" cont="0"/>
     </junction>
-    <junction id="pedestrian_bot" type="dead_end" x="63.23" y="-10.11" incLanes="footway_crossing_0 footway_crossing_1" intLanes="" shape="56.83,-10.21 63.23,-10.11"/>
-    <junction id="pedestrian_top" type="dead_end" x="62.78" y="19.25" incLanes="" intLanes="" shape="62.78,19.25 56.38,19.15"/>
     <junction id="top_center" type="dead_end" x="0.00" y="50.00" incLanes="TC_0 TC_1" intLanes="" shape="6.40,50.00 0.00,50.00"/>
     <junction id="top_left" type="dead_end" x="-100.00" y="10.00" incLanes="TL_0 TL_1" intLanes="" shape="-99.36,16.37 -100.00,10.00"/>
     <junction id="top_right" type="dead_end" x="100.00" y="10.00" incLanes="" intLanes="" shape="100.00,10.00 99.04,19.55"/>
 
-    <connection from="BC" to="BR" fromLane="0" toLane="0" via=":center_4_0" tl="center" linkIndex="4" dir="r" state="O"/>
-    <connection from="BC" to="BR" fromLane="0" toLane="1" via=":center_5_0" tl="center" linkIndex="5" dir="r" state="O"/>
-    <connection from="BC" to="TC" fromLane="1" toLane="1" via=":center_6_0" tl="center" linkIndex="6" dir="s" state="o"/>
-    <connection from="BC" to="TL" fromLane="2" toLane="0" via=":center_7_0" tl="center" linkIndex="7" dir="l" state="o"/>
-    <connection from="BL" to="BR" fromLane="0" toLane="0" via=":center_8_0" tl="center" linkIndex="8" dir="s" state="o"/>
-    <connection from="BL" to="BR" fromLane="1" toLane="1" via=":center_8_1" tl="center" linkIndex="9" dir="s" state="o"/>
-    <connection from="TR" to="TC" fromLane="0" toLane="0" via=":center_0_0" tl="center" linkIndex="0" dir="r" state="O"/>
-    <connection from="TR" to="TC" fromLane="0" toLane="1" via=":center_1_0" tl="center" linkIndex="1" dir="r" state="O"/>
-    <connection from="TR" to="TL" fromLane="1" toLane="0" via=":center_2_0" tl="center" linkIndex="2" dir="s" state="O"/>
-    <connection from="TR" to="TL" fromLane="2" toLane="1" via=":center_2_1" tl="center" linkIndex="3" dir="s" state="O"/>
+    <connection from="BC" to="BR" fromLane="0" toLane="1" via=":center_3_0" tl="center" linkIndex="3" dir="r" state="O"/>
+    <connection from="BC" to="TC" fromLane="1" toLane="0" via=":center_4_0" tl="center" linkIndex="5" dir="s" state="o"/>
+    <connection from="BC" to="TC" fromLane="1" toLane="1" via=":center_4_1" tl="center" linkIndex="4" dir="s" state="o"/>
+    <connection from="BC" to="TL" fromLane="2" toLane="0" via=":center_6_0" tl="center" linkIndex="6" dir="l" state="o"/>
+    <connection from="BL" to="BR" fromLane="0" toLane="0" via=":center_7_0" tl="center" linkIndex="7" dir="s" state="o"/>
+    <connection from="BL" to="BR" fromLane="1" toLane="1" via=":center_7_1" tl="center" linkIndex="8" dir="s" state="o"/>
+    <connection from="TR" to="TC" fromLane="0" toLane="1" via=":center_0_0" tl="center" linkIndex="0" dir="r" state="O"/>
+    <connection from="TR" to="TL" fromLane="1" toLane="0" via=":center_1_0" tl="center" linkIndex="1" dir="s" state="O"/>
+    <connection from="TR" to="TL" fromLane="2" toLane="1" via=":center_1_1" tl="center" linkIndex="2" dir="s" state="O"/>
 
-    <connection from=":center_0" to="TC" fromLane="0" toLane="0" dir="r" state="M"/>
-    <connection from=":center_1" to="TC" fromLane="0" toLane="1" dir="r" state="M"/>
-    <connection from=":center_2" to="TL" fromLane="0" toLane="0" dir="s" state="M"/>
-    <connection from=":center_2" to="TL" fromLane="1" toLane="1" dir="s" state="M"/>
-    <connection from=":center_4" to="BR" fromLane="0" toLane="0" dir="r" state="M"/>
-    <connection from=":center_5" to="BR" fromLane="0" toLane="1" dir="r" state="M"/>
-    <connection from=":center_6" to="TC" fromLane="0" toLane="1" dir="s" state="M"/>
-    <connection from=":center_7" to="TL" fromLane="0" toLane="0" dir="l" state="M"/>
-    <connection from=":center_8" to="BR" fromLane="0" toLane="0" dir="s" state="M"/>
-    <connection from=":center_8" to="BR" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":center_0" to="TC" fromLane="0" toLane="1" dir="r" state="M"/>
+    <connection from=":center_1" to="TL" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":center_1" to="TL" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":center_3" to="BR" fromLane="0" toLane="1" dir="r" state="M"/>
+    <connection from=":center_4" to="TC" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":center_4" to="TC" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":center_6" to="TL" fromLane="0" toLane="0" dir="l" state="M"/>
+    <connection from=":center_7" to="BR" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":center_7" to="BR" fromLane="1" toLane="1" dir="s" state="M"/>
 
 </net>
