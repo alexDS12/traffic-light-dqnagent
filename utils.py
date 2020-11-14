@@ -1,7 +1,7 @@
 import sys
 import os
-from os import path
 from sumolib import checkBinary
+from matplotlib import pyplot as plt
 
 """
 Functions to split headers and data from file and add result to nested dict. 
@@ -66,7 +66,7 @@ Returns:
 def sumo_config(gui, time_steps):
     #check if var is set, otherwise application won't run
     if 'SUMO_HOME' in os.environ:
-        tools = path.join(os.environ['SUMO_HOME'], 'tools')
+        tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
         sys.path.append(tools)
     else:
         sys.exit('Please declare environment variable "SUMO_HOME"')
@@ -79,3 +79,35 @@ def sumo_config(gui, time_steps):
         
     return [sumoBinary, '-c', 'data/sumo_config.sumocfg', '--no-step-log', 'true', 
             '--waiting-time-memory', time_steps]
+
+"""
+Function to create a new folder for each trained model,
+giving an unique int name after checking last int.
+"""
+def create_folder():
+    folder_name = 'models'
+    models_path = os.path.join(os.getcwd(), folder_name)
+    if not os.path.exists(models_path):
+        os.mkdir(folder_name)
+
+    model_dirs = os.listdir(models_path)
+    if model_dirs:
+        new_dir = int(model_dirs[-1]) + 1
+    else:
+        new_dir = 1
+    model_path = os.path.join(models_path, str(new_dir))
+    os.mkdir(model_path)
+    return model_path
+
+"""
+Function to plot training data and save as a png file
+"""
+def plot_data(data, y_label, model_path, x_label='Episode'):
+    plt.plot(data)
+    plt.title(x_label + ' vs ' + y_label)
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    plt.legend(['teste'])
+    
+    fig_name = y_label + '.png'
+    plt.savefig(os.path.join(model_path, fig_name), dpi=200)

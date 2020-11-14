@@ -33,7 +33,7 @@ class TrafficGenerator(object):
             routes_file.write("""<routes>
                 <vType id="car" accel="1.0" decel="4.5" sigma="0.5" length="3.0" minGap="2.5" maxSpeed="20.0" guiShape="passenger" />
                 <vType id="bus/city" accel="0.9" decel="4.5" sigma="0.5" length="5.0" minGap="2.5" maxSpeed="20.0" guiShape="bus" color="1,0,0"/>
-                <vType id="motorcycle" accel="1.0" decel="4.5" sigma="0.5" length="2.0" minGap="4.0" maxSpeed="20.0" guiShape="motorcycle" color="0.5,0.5,1"/>
+                <vType id="motorcycle" accel="1.0" decel="4.5" sigma="0.5" length="2.0" minGap="3.0" maxSpeed="20.0" guiShape="motorcycle" color="0.5,0.5,1"/>
         
                 <route id="S_N" edges="BC TC" />
                 <route id="S_W" edges="BC TL" />

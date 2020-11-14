@@ -48,7 +48,7 @@ class Network(object):
     
     def build_model(self):
         model = Sequential()
-        model.add(Dense(units=self.width_layers, input_dim=self.nb_states, activation='relu', name='hidden0'))        
+        model.add(Dense(units=self.width_layers, input_shape=(self.nb_states,), activation='relu', name='hidden0'))        
         for i in range(self.nb_hidden_layers-1):
             model.add(Dense(units=self.width_layers, activation='relu', name='hidden{}'.format(i+1)))
             
@@ -57,7 +57,7 @@ class Network(object):
         return model
     
     def predict_best(self, state):
-        return self.model.predict(state)
+        return self.model.predict(np.reshape(state, (1, self.nb_states)))
     
     def predict_batch(self, states):
         return self.model.predict(states)
@@ -89,14 +89,19 @@ class Memory(object):
         self.size = size
         self.memory = []
         
+    def memory_size(self):
+        return len(self.memory)
+        
     def add_sample(self, sample):
         self.memory.append(sample)
-        if len(self.memory) > self.size:
+        if self.memory_size() > self.size:
             del self.memory[0]
     
     def get_sample(self, batch_size):
+        if batch_size > self.memory_size():
+            batch_size = self.memory_size()
         sample = zip(*random.sample(self.memory, batch_size))
-        return [item for item in sample]
+        return np.array([item for item in sample])
     
 class DQNAgent(object):
     """
@@ -108,7 +113,7 @@ class DQNAgent(object):
         Agent's NN.
     memory : Memory
         Agent's memory.
-    gamma : int
+    discount_rate : float
         Discount rate for every action agent takes.
     batch_size : int
         Quantity of actions to train NN.
@@ -116,6 +121,8 @@ class DQNAgent(object):
         Quantity of times a training session will run.
     nb_actions : int
         The number of possible actions agent can take.
+    nb_states : int
+        The number of possible states agent can be at.
     
     Methods
     -------
@@ -130,23 +137,34 @@ class DQNAgent(object):
     _load_model(model_path):
         Checks whether model exists and loads it, otherwise an error is given.
     """
-    def __init__(self, nn, memory_size, gamma, batch_size, epochs):
+    def __init__(self, nn, memory_size, discount_rate, batch_size, epochs):
         self.nn = nn        
         self.memory = Memory(memory_size)
-        self.gamma = gamma
+        self.discount_rate = discount_rate
         self.batch_size = batch_size
         self.epochs = epochs        
         self.nb_actions = self.nn.nb_actions
+        self.nb_states = self.nn.nb_states
         
     def experience_replay(self):
-        for _ in range(1):
-            batch_last_state, batch_next_state, batch_action, batch_reward = self.memory.get_sample(self.batch_size)
-            print(type(batch_last_state))
-            #q_values = self.nn.predict_batch(np.array(batch_last_state))
-            #next_q_values = self.nn.predict_batch(np.array(batch_next_state))  
-            print('q_values')
-            #print(q_values)
-    
+        for _ in range(self.epochs):
+            if self.memory.memory_size() > 0:
+                last_states, next_states, actions, rewards = self.memory.get_sample(self.batch_size)
+                
+                inputs = np.zeros((self.batch_size, self.nb_states))
+                outputs = np.zeros((self.batch_size, self.nb_actions))
+                
+                q_values = self.nn.predict_batch(last_states)
+                next_q_values = self.nn.predict_batch(next_states)
+                
+                for i in range(self.batch_size):
+                    inputs[i] = last_states[i]
+                    q_value = q_values[i]
+                    q_value[actions[i]] = rewards[i] + self.discount_rate * np.amax(next_q_values[i])   
+                    outputs[i] = q_value
+                   
+                self.nn.train_batch(inputs, outputs)
+        
     def select_action(self, state, epsilon):
         #exploitation
         if random.random() > epsilon:

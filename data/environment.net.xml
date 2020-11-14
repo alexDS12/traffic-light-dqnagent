@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 10/24/20 14:28:44 by Eclipse SUMO netedit Version 1.7.0
+<!-- generated on 11/10/20 21:15:24 by Eclipse SUMO netedit Version 1.7.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
 
     <input>
@@ -62,31 +62,31 @@
         <lane id=":center_7_1" index="1" disallow="pedestrian" speed="13.89" length="18.55" shape="-4.81,-1.60 13.58,-1.60"/>
     </edge>
 
-    <edge id="BC" from="bot_center" to="center" priority="-1" length="100.00">
-        <lane id="BC_0" index="0" disallow="pedestrian" speed="13.89" length="100.00" shape="8.00,-70.00 8.00,-10.40"/>
-        <lane id="BC_1" index="1" disallow="pedestrian" speed="13.89" length="100.00" shape="4.80,-70.00 4.80,-10.40"/>
-        <lane id="BC_2" index="2" disallow="pedestrian" speed="13.89" length="100.00" shape="1.60,-70.00 1.60,-10.40"/>
+    <edge id="BC" from="bot_center" to="center" priority="-1" length="210.00">
+        <lane id="BC_0" index="0" disallow="pedestrian" speed="13.89" length="210.00" shape="8.00,-70.00 8.00,-10.40"/>
+        <lane id="BC_1" index="1" disallow="pedestrian" speed="13.89" length="210.00" shape="4.80,-70.00 4.80,-10.40"/>
+        <lane id="BC_2" index="2" disallow="pedestrian" speed="13.89" length="210.00" shape="1.60,-70.00 1.60,-10.40"/>
     </edge>
-    <edge id="BL" from="bot_left" to="center" priority="-1" length="100.00">
-        <lane id="BL_0" index="0" disallow="pedestrian" speed="13.89" length="100.00" shape="-100.00,-4.80 -5.12,-4.80"/>
-        <lane id="BL_1" index="1" disallow="pedestrian" speed="13.89" length="100.00" shape="-100.00,-1.60 -4.81,-1.60"/>
+    <edge id="BL" from="bot_left" to="center" priority="-1" length="210.00">
+        <lane id="BL_0" index="0" disallow="pedestrian" speed="13.89" length="210.00" shape="-100.00,-4.80 -5.12,-4.80"/>
+        <lane id="BL_1" index="1" disallow="pedestrian" speed="13.89" length="210.00" shape="-100.00,-1.60 -4.81,-1.60"/>
     </edge>
-    <edge id="BR" from="center" to="bot_right" priority="-1" spreadType="roadCenter" length="100.00">
-        <lane id="BR_0" index="0" speed="13.89" length="100.00" shape="13.59,-4.80 100.00,-4.80"/>
-        <lane id="BR_1" index="1" speed="13.89" length="100.00" shape="13.58,-1.60 100.00,-1.60"/>
+    <edge id="BR" from="center" to="bot_right" priority="-1" spreadType="roadCenter" length="210.00">
+        <lane id="BR_0" index="0" speed="13.89" length="210.00" shape="13.59,-4.80 100.00,-4.80"/>
+        <lane id="BR_1" index="1" speed="13.89" length="210.00" shape="13.58,-1.60 100.00,-1.60"/>
     </edge>
-    <edge id="TC" from="center" to="top_center" priority="-1" length="100.00">
-        <lane id="TC_0" index="0" speed="13.89" length="100.00" shape="4.80,14.29 4.80,50.00"/>
-        <lane id="TC_1" index="1" speed="13.89" length="100.00" shape="1.60,14.29 1.60,50.00"/>
+    <edge id="TC" from="center" to="top_center" priority="-1" length="210.00">
+        <lane id="TC_0" index="0" speed="13.89" length="210.00" shape="4.80,14.29 4.80,50.00"/>
+        <lane id="TC_1" index="1" speed="13.89" length="210.00" shape="1.60,14.29 1.60,50.00"/>
     </edge>
-    <edge id="TL" from="center" to="top_left" priority="-1" length="100.00">
-        <lane id="TL_0" index="0" speed="13.89" length="100.00" shape="-4.14,5.24 -99.52,14.78"/>
-        <lane id="TL_1" index="1" speed="13.89" length="100.00" shape="-4.45,2.05 -99.84,11.59"/>
+    <edge id="TL" from="center" to="top_left" priority="-1" length="210.00">
+        <lane id="TL_0" index="0" speed="13.89" length="210.00" shape="-4.14,5.24 -99.52,14.78"/>
+        <lane id="TL_1" index="1" speed="13.89" length="210.00" shape="-4.45,2.05 -99.84,11.59"/>
     </edge>
-    <edge id="TR" from="top_right" to="center" priority="-1" length="100.00">
-        <lane id="TR_0" index="0" disallow="pedestrian" speed="13.89" length="100.00" shape="99.20,17.96 13.54,9.39"/>
-        <lane id="TR_1" index="1" disallow="pedestrian" speed="13.89" length="100.00" shape="99.52,14.78 13.55,6.18"/>
-        <lane id="TR_2" index="2" disallow="pedestrian" speed="13.89" length="100.00" shape="99.84,11.59 13.56,2.96"/>
+    <edge id="TR" from="top_right" to="center" priority="-1" length="210.00">
+        <lane id="TR_0" index="0" disallow="pedestrian" speed="13.89" length="210.00" shape="99.20,17.96 13.54,9.39"/>
+        <lane id="TR_1" index="1" disallow="pedestrian" speed="13.89" length="210.00" shape="99.52,14.78 13.55,6.18"/>
+        <lane id="TR_2" index="2" disallow="pedestrian" speed="13.89" length="210.00" shape="99.84,11.59 13.56,2.96"/>
     </edge>
 
     <tlLogic id="center" type="static" programID="0" offset="0">

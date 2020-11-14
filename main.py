@@ -1,8 +1,14 @@
 from ai import Network, DQNAgent
 from traffic_generator import TrafficGenerator
 from simulation import Simulation
-from utils import read_config, sumo_config
-#from datetime import datetime
+from utils import read_config, sumo_config, create_folder, plot_data
+from shutil import copyfile
+from os import path
+
+def save_data():
+    model_path = create_folder()
+    copyfile('training_config.txt', path.join(model_path, 'training_config.txt'))
+    return model_path
 
 def main():    
     config = read_config('training_config.txt')
@@ -20,10 +26,10 @@ def main():
                  float(config['neural_network']['learning_rate']))
     
     agent = DQNAgent(nn=nn,  
-                     gamma       = float(config['agent']['discount_rate']),
-                     memory_size = int(config['memory']['size']),                                       
-                     epochs      = int(config['neural_network']['epochs']),
-                     batch_size  = int(config['neural_network']['batch_size']))  
+                     discount_rate = float(config['agent']['discount_rate']),  
+                     batch_size    = int(config['agent']['nb_states']),         
+                     epochs        = int(config['agent']['epochs']),
+                     memory_size   = int(config['memory']['size']))  
                 
     simulation = Simulation(agent, sumo_cfg, int(config['simulation']['max_steps']))
     
@@ -32,8 +38,12 @@ def main():
         traffic_generator.generate_routefile() #seed?
         epsilon = 1 - (epoch / int(config['simulation']['total_episodes']))
         simulation.run(epsilon)
+        
+    model_path = save_data()
+    agent._save_model(model_path)
     
-    
+    for key, value in simulation.get_stats().items():        
+        plot_data(data=value, y_label=key, model_path=model_path)
 
 
 if __name__ == '__main__':
