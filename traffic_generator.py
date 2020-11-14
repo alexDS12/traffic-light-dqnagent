@@ -31,9 +31,7 @@ class TrafficGenerator(object):
             Generating types of vehicles and routes
             """
             routes_file.write("""<routes>
-                <vType id="car" accel="1.0" decel="4.5" sigma="0.5" length="3.0" minGap="2.5" maxSpeed="20.0" guiShape="passenger" />
-                <vType id="bus/city" accel="0.9" decel="4.5" sigma="0.5" length="5.0" minGap="2.5" maxSpeed="20.0" guiShape="bus" color="1,0,0"/>
-                <vType id="motorcycle" accel="1.0" decel="4.5" sigma="0.5" length="2.0" minGap="3.0" maxSpeed="20.0" guiShape="motorcycle" color="0.5,0.5,1"/>
+                <vType id="car" accel="1.0" decel="4.5" sigma="0.5" length="5.0" minGap="2.5" maxSpeed="20.0" guiShape="passenger" />
         
                 <route id="S_N" edges="BC TC" />
                 <route id="S_W" edges="BC TL" />
@@ -64,7 +62,7 @@ class TrafficGenerator(object):
                 departures = np.delete(departures, 0)                
                   
                 veh_num = np.random.randint(0, 3)
-                vehicle_type = "car" if veh_num == 0 else ("bus/city" if veh_num == 1 else "motorcycle")
+                vehicle_type = "car"
                 
                 #Now we randomize which route vehicle will take                
                 route = np.random.randint(0, 3)
