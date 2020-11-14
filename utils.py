@@ -77,8 +77,7 @@ def sumo_config(gui, time_steps):
     else:
         sumoBinary = checkBinary('sumo')        
         
-    return [sumoBinary, '-c', 'data/sumo_config.sumocfg', '--no-step-log', 'true', 
-            '--waiting-time-memory', time_steps]
+    return [sumoBinary, '-c', 'data/sumo_config.sumocfg', '--no-step-log', 'true', '--waiting-time-memory', str(time_steps)]
 
 """
 Function to create a new folder for each trained model,
