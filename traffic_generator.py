@@ -14,7 +14,7 @@ class TrafficGenerator(object):
     Methods
     -------
     generate_routefile()
-        Generates environment's xml file -> type of vehicles and routes
+        Generates environment's xml file -> type of vehicles and routes.
     """
     def __init__(self, nb_vehicles, time_steps):
         self.nb_vehicles = nb_vehicles
@@ -32,6 +32,8 @@ class TrafficGenerator(object):
             """
             routes_file.write("""<routes>
                 <vType id="car" accel="1.0" decel="4.5" sigma="0.5" length="5.0" minGap="2.5" maxSpeed="20.0" guiShape="passenger" />
+                <vType id="bus/city" accel="0.9" decel="4.5" sigma="0.5" length="5.0" minGap="2.5" maxSpeed="20.0" guiShape="bus" color="1,0,0"/>
+                <vType id="motorcycle" accel="1.0" decel="4.5" sigma="0.5" length="2.0" minGap="3.0" maxSpeed="20.0" guiShape="motorcycle" color="0.5,0.5,1"/>
         
                 <route id="S_N" edges="BC TC" />
                 <route id="S_W" edges="BC TL" />
@@ -62,31 +64,32 @@ class TrafficGenerator(object):
                 departures = np.delete(departures, 0)                
                   
                 veh_num = np.random.randint(0, 3)
-                vehicle_type = "car"
+                vehicle_type = "car" if veh_num == 0 else ("bus/city" if veh_num == 1 else "motorcycle")
                 
                 #Now we randomize which route vehicle will take                
                 route = np.random.randint(0, 3)
-                if randomness < 0.7:    
-                    #west to east (Bot_Left -> Bot_Right)
-                    if route == 0: 
-                        routes_file.write('\n    <vehicle id="BL_BR_{}" type="{}" route="W_E" depart="{}" departLane="random" departSpeed="10.0" />'.format(i, vehicle_type, depart))
-                    #east to west (Top_Right -> Top_Left)
-                    elif route == 1: 
-                        routes_file.write('\n    <vehicle id="TR_TL_{}" type="{}" route="E_W" depart="{}" departLane="random" departSpeed="10.0" />'.format(i, vehicle_type, depart)) 
-                    #south to north (Bot_Center -> Top_Center)
-                    else: 
-                        routes_file.write('\n    <vehicle id="BC_TC_{}" type="{}" route="S_N" depart="{}" departLane="random" departSpeed="10.0" />'.format(i, vehicle_type, depart))
+                if randomness < 0.7:
+                    if route == 0: #west to east (Bot_Left -> Bot_Right)
+                        route_totake = 'W_E'
+                        vehicle_id = 'BL_BR'
+                    elif route == 1: #east to west (Top_Right -> Top_Left)
+                        route_totake = 'E_W'
+                        vehicle_id = 'TR_TL'
+                    else: #south to north (Bot_Center -> Top_Center)
+                        route_totake = 'S_N'
+                        vehicle_id = 'BC_TC'
                 else:
-                    #south to west (Bot_Center -> Top_Left)
-                    if route == 0:
-                        routes_file.write('\n    <vehicle id="BC_TL_{}" type="{}" route="S_W" depart="{}" departLane="random" departSpeed="10.0" />'.format(i, vehicle_type, depart))
-                    #south to east (Bot_Center -> Bot_Right)
-                    elif route == 1:
-                        routes_file.write('\n    <vehicle id="BC_BR_{}" type="{}" route="S_E" depart="{}" departLane="random" departSpeed="10.0" />'.format(i, vehicle_type, depart))
-                    #east to north (Top_Right -> Top_Center)
-                    else:
-                        routes_file.write('\n    <vehicle id="TR_TC_{}" type="{}" route="E_N" depart="{}" departLane="random" departSpeed="10.0" />'.format(i, vehicle_type, depart))
-                        
+                    if route == 0: #south to west (Bot_Center -> Top_Left)
+                        route_totake = 'S_W'
+                        vehicle_id = 'BC_TL'
+                    elif route == 1: #south to east (Bot_Center -> Bot_Right)
+                        route_totake = 'S_E'
+                        vehicle_id = 'BC_BR'
+                    else: #east to north (Top_Right -> Top_Center)
+                        route_totake = 'E_N'
+                        vehicle_id = 'TR_TC'                
+                routes_file.write('\n    <vehicle id="{}_{}" type="{}" route="{}" depart="{}" departLane="random" departSpeed="10.0" />'.format(vehicle_id, i, vehicle_type, route_totake, depart))       
             #close routes tag           
             routes_file.write("\n</routes>")
             routes_file.close()
+            print('Traffic generation done')

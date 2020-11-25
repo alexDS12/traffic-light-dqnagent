@@ -1,13 +1,13 @@
 #this handles all config for simulation (traci)
 [simulation]
-gui=False,max_steps=5000,nb_cars_generated=1000,total_episodes=100
+gui=False,max_steps=6000,nb_cars_generated=1000,total_episodes=1000
 
 #topology of NN
 [neural_network]
-nb_hidden_layers=1,width_layers=42,learning_rate=0.001
+nb_hidden_layers=1,width_layers=50,learning_rate=0.001,batch_size=100
 
 [memory]
-size=10000
+size=50000
 
 [agent]
 nb_states=60,nb_actions=4,discount_rate=0.6,epochs=500

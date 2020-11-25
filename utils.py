@@ -2,6 +2,7 @@ import sys
 import os
 from sumolib import checkBinary
 from matplotlib import pyplot as plt
+from shutil import copyfile
 
 """
 Functions to split headers and data from file and add result to nested dict. 
@@ -35,7 +36,7 @@ def read_config(text_file):
                     config[header][key] = value
             return config
     except FileNotFoundError:
-        return 'File not found'
+        sys.exit('File not found')
 
 def config_split(file):
     headers = []
@@ -69,31 +70,34 @@ def sumo_config(gui, time_steps):
         tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
         sys.path.append(tools)
     else:
-        sys.exit('Please declare environment variable "SUMO_HOME"')
-        
+        sys.exit('Please declare environment variable "SUMO_HOME"')   
     #check if using GUI, not necessarily needed after SUMO 0.28.0
-    if gui:
+    if gui == True:
         sumoBinary = checkBinary('sumo-gui')
     else:
         sumoBinary = checkBinary('sumo')        
         
-    return [sumoBinary, '-c', 'data/sumo_config.sumocfg', '--no-step-log', 'true', '--waiting-time-memory', str(time_steps)]
+    return [sumoBinary, '-c', 'data/sumo_config.sumocfg', '--no-step-log', 'true']
 
 """
 Function to create a new folder for each trained model,
 giving an unique int name after checking last int.
+
+Returns:
+    Model's folder created with training and testing subfolders.
 """
 def create_folder():
-    folder_name = 'models'
-    models_path = os.path.join(os.getcwd(), folder_name)
+    models_folder = 'models'
+    models_path = os.path.join(os.getcwd(), models_folder)
     if not os.path.exists(models_path):
-        os.mkdir(folder_name)
+        os.mkdir(models_folder)
 
-    model_dirs = os.listdir(models_path)
-    if model_dirs:
-        new_dir = int(model_dirs[-1]) + 1
+    dirs = sorted(os.listdir(models_path))
+    if dirs:
+        new_dir = int(dirs[-1]) + 1
     else:
         new_dir = 1
+
     model_path = os.path.join(models_path, str(new_dir))
     os.mkdir(model_path)
     return model_path
@@ -101,12 +105,16 @@ def create_folder():
 """
 Function to plot training data and save as a png file
 """
-def plot_data(data, y_label, model_path, x_label='Episode'):
+def plot_data(data, y_label, model_path, train_or_test, x_label='Episode'):
+    plt.rcParams.update({'font.size': 15})
     plt.plot(data)
     plt.title(x_label + ' vs ' + y_label)
     plt.xlabel(x_label)
     plt.ylabel(y_label)
-    plt.legend(['teste'])
-    
-    fig_name = y_label + '.png'
-    plt.savefig(os.path.join(model_path, fig_name), dpi=200)
+    plt.ylim(min(data), max(data))
+    fig_name = train_or_test + '_' + y_label + '.png'
+    plt.savefig(os.path.join(model_path, fig_name), dpi=100, bbox_inches = 'tight')
+
+def save_data(file_tosave, model_path):
+    print('Saving data at: %s\n' % model_path)
+    copyfile(file_tosave, os.path.join(model_path, file_tosave))
