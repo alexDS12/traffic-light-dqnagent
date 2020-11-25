@@ -1,13 +1,9 @@
 from ai import Network, DQNAgent
 from traffic_generator import TrafficGenerator
 from simulation import Simulation
-from utils import read_config, sumo_config, create_folder, plot_data
-from shutil import copyfile
-from os import path
-
+from utils import *
 import timeit
 
-#imports ...
 def initialize_config(config_file):
     config = read_config(config_file)
 
@@ -24,13 +20,13 @@ def main_testing():
     nn = Network(int(config['agent']['nb_states']), \
                  nb_model = config['utils']['model'])
   
-  #agent = DQNAgent(nn = nn)
+    #agent = DQNAgent(nn = nn)
 
-  #simulation = Simulation(agent, sumo, int(config['simulation']['max_steps']))
+    #simulation = Simulation(agent, sumo, int(config['simulation']['max_steps']))
 
-  save_data('testing_config.txt', 'models/' + config['utils']['model'])
+    save_data('testing_config.txt', 'models/' + config['utils']['model'])
   
-  #TODO: agent, simulation
+    #TODO: agent, simulation
 
 
 def main_training():
