@@ -13,7 +13,8 @@ All you will need:
 1. TensorFlow and TensorFlow-gpu v2.x.
 2. Keras v2.3.1.
 3. SUMO v1.7.0.
-4. TraCI.
+4. Python v3.7.
+5. TraCI.
 
 With Anaconda:
 ```
@@ -87,10 +88,10 @@ When total episodes are reached, 3 plots will be generated in the path shown in 
 
 ## Built With
 
-* [Tensorflow](https://www.tensorflow.org/) v2.1.0 - Machine Learning platform
-* [Keras](https://keras.io/) v2.3.1 - Deep Learning API
-* [Python](https://www.python.org/) v3.7
-* [SUMO](https://www.eclipse.org/sumo/) v1.7.0 - Traffic simulation package
+* [Tensorflow](https://www.tensorflow.org/) - Machine Learning platform
+* [Keras](https://keras.io/) - Deep Learning API
+* [SUMO](https://www.eclipse.org/sumo/) - Traffic simulation package
+* [Python](https://www.python.org/)
 
 ## Authors
 
