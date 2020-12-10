@@ -1,9 +1,9 @@
 #this handles all config for simulation (traci)
 [simulation]
-gui=False,max_steps=6000,nb_cars_generated=1000,total_episodes=5
+gui=False,max_steps=5000,nb_cars_generated=2000,total_episodes=100
 
 [agent]
-nb_states=60,nb_actions=4
+nb_states=60
 
 [utils] #model to test
 model=1

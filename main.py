@@ -16,17 +16,26 @@ def initialize_config(config_file):
 
 def main_testing():
     config, sumo, traffic_generator = initialize_config('testing_config.txt')
-  
+
     nn = Network(int(config['agent']['nb_states']), \
                  nb_model = config['utils']['model'])
   
-    #agent = DQNAgent(nn = nn)
+    agent = DQNAgent(nn = nn)
 
-    #simulation = Simulation(agent, sumo, int(config['simulation']['max_steps']))
+    simulation = Simulation(agent, sumo, int(config['simulation']['max_steps']))
 
-    save_data('testing_config.txt', 'models/' + config['utils']['model'])
+    model_path = 'models/' + config['utils']['model']
+    save_data('testing_config.txt', model_path)
+
+    for epoch in range(int(config['simulation']['total_episodes'])):
+        print('Testing agent - Episode: {}/{}'.format(epoch+1, config['simulation']['total_episodes']))
+        traffic_generator.generate_routefile()
+        start_time = timeit.default_timer()
+        simulation.run(epsilon=-1) #now best action needs to be always chosen
+        print('Execution time: {:.1f} s\n'.format(timeit.default_timer() - start_time))
   
-    #TODO: agent, simulation
+    for key, value in simulation.get_stats().items():
+        plot_data(value, key, model_path, 'testing')
 
 
 def main_training():

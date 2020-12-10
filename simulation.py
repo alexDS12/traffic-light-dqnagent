@@ -133,8 +133,9 @@ class Simulation(object):
 
             reward = last_total_waiting - total_waiting
 
-            #save data in agent's memory
-            self.agent.memory.add_sample((last_state, next_state, action, reward))
+            #save data in agent's memory only if training
+            if not self.is_training == None:            
+                self.agent.memory.add_sample((last_state, next_state, action, reward))
 
             step += steps_done
             total_waiting_time += observation[0]
@@ -150,8 +151,9 @@ class Simulation(object):
         self.save_stats(total_reward, total_waiting_time, total_waiting_length)
         traci.close()
 
-        #train NN only in between epochs
-        self.agent.experience_replay()
+        #train NN only in between epochs only if training
+        if not self.is_training == None:        
+            self.agent.experience_replay()
 
     def save_stats(self, total_reward, total_waiting_time, total_waiting_length):
         self.total_rewards.append(total_reward)
