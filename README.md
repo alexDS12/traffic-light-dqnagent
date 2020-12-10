@@ -60,19 +60,19 @@ nb_states=60,nb_actions=4,discount_rate=0.6,epochs=500
 ```
 
 ```
-gui = boolean - Whether you want to visually see what's happening.
-max_steps = int - For how long simulation will last.
+gui               = boolean - Whether you want to visually see what's happening.
+max_steps         = int - For how long simulation will last.
 nb_cars_generated = int - How many vehicles will be generated for the simulation.
-total_episodes = int - Number of episodes that will run in a simulation.
-nb_hidden_layers = int - How many hidden layers there will be (NN's structure).
-width_layers = int - How many nodes there will be in each hidden layer.
-learning_rate = float - Parameter that determines the step size at each epoch during NN's training.
-batch_size = int - Length of data that will be passed from memory to training.
-size = int - Agent's memory size for experience replay between episodes.
-nb_states = int - NN's inputs.
-nb_actions = int - NN's outputs.
-discount_rate = float - Basically to control agent's decision making.
-epochs = int - How many epochs agent will train and fitting weights.
+total_episodes    = int - Number of episodes that will run in a simulation.
+nb_hidden_layers  = int - How many hidden layers there will be (NN's structure).
+width_layers      = int - How many nodes there will be in each hidden layer.
+learning_rate     = float - Parameter that determines the step size at each epoch during NN's training.
+batch_size        = int - Length of data that will be passed from memory to training.
+size              = int - Agent's memory size for experience replay between episodes.
+nb_states         = int - NN's inputs.
+nb_actions        = int - NN's outputs.
+discount_rate     = float - Basically to control agent's decision making.
+epochs            = int - How many epochs agent will train and fitting weights.
 ```
 
 Then you can enter the following command inside root folder:
