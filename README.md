@@ -26,7 +26,6 @@ If using pip:
 pip install --upgrade pip
 pip install tensorflow
 pip install keras
-pip install traci
 ```
 Or even Colab:
 ```
