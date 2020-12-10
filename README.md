@@ -87,6 +87,10 @@ Every piece of code has it's own docstring, therefore it might be helpful. Howev
 
 When total episodes are reached, 3 plots will be generated in the path shown in console.
 
+## Problems
+
+Unfortunately the DQN Agent isn't being used as intended, it isn't following real world's traffic light codes where there's a yellow phase in between green and red phases. 
+
 ## Built With
 
 * [Tensorflow](https://www.tensorflow.org/) - Machine Learning platform
