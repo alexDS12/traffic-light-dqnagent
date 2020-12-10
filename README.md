@@ -85,7 +85,7 @@ If everything goes as planned, code will run and ask whether you want to (1) tra
 
 Every piece of code has it's own docstring, therefore it might be helpful. However, if any questions, please open an issue and I'll gladly help you.
 
-When total episodes are reached, 3 plots will be generated in the path shown in console.
+When total episodes are reached, total rewards, mean waiting time and mean waiting length will be generated in the path shown in console.
 
 ## Problems
 
