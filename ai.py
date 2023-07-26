@@ -3,9 +3,11 @@ import random
 from os import path, environ
 import sys
 environ['TF_CPP_MIN_LOG_LEVEL'] = '2' #1 to filter logs, 2 warnings, 3 for errors
-from keras.layers import Dense
-from keras.models import Sequential, save_model, load_model
-from keras.optimizers import Adam
+
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import Sequential, save_model, load_model
+from tensorflow.keras.optimizers import Adam
+
 
 class Network(object):
     """
@@ -44,6 +46,7 @@ class Network(object):
     _load_model(model_path):
         Checks whether model exists and loads it, otherwise an error is given.        
     """
+
     def __init__(self, nb_states, nb_actions=None, nb_hidden_layers=None, width_layers=None, learning_rate=None, nb_model=None):
         self.nb_states = nb_states
         self.nb_actions = nb_actions
@@ -87,7 +90,8 @@ class Network(object):
             return load_model(filepath=model_path)
         else:
             sys.exit('Model not found')
-        
+
+
 class Memory(object):
     """
     Represents DQN's Memory.
@@ -110,6 +114,7 @@ class Memory(object):
         Gets N random samples from memory, grouping same variables in one tuple.
         E.g. (state0, state1, ...) (action0, action1, ...) and returns list ([states], [actions], ...)
     """
+
     def __init__(self, size):
         self.size = size
         self.memory = []
@@ -125,8 +130,8 @@ class Memory(object):
     def get_sample(self, batch_size):
         if batch_size > self.memory_size():
             batch_size = self.memory_size()
-        sample = zip(*random.sample(self.memory, batch_size))
-        return np.array([item for item in sample])
+        sample = list(zip(*random.sample(self.memory, batch_size)))
+        return np.array(sample, dtype=object)
     
 
 class DQNAgent(object):
@@ -161,7 +166,8 @@ class DQNAgent(object):
     get_epsilon(epoch):
         Calculates epsilon decay which is a e-greedy's variation for current epoch of simulation.
     """
-    def __init__(self, nn, memory_size, discount_rate, batch_size, epochs):
+
+    def __init__(self, nn, memory_size=None, discount_rate=None, batch_size=None, epochs=None):
         self.nn = nn        
         self.memory = Memory(memory_size)
         self.discount_rate = discount_rate

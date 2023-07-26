@@ -3,6 +3,8 @@ from traffic_generator import TrafficGenerator
 from simulation import Simulation
 from utils import *
 import timeit
+import argparse
+
 
 def initialize_config(config_file):
     config = read_config(config_file)
@@ -14,13 +16,14 @@ def initialize_config(config_file):
                                          int(config['simulation']['max_steps']))
     return config, sumo, traffic_generator
 
-def main_testing():
+
+def testing():
     config, sumo, traffic_generator = initialize_config('testing_config.txt')
 
     nn = Network(int(config['agent']['nb_states']), \
                  nb_model = config['utils']['model'])
   
-    agent = DQNAgent(nn = nn)
+    agent = DQNAgent(nn)
 
     simulation = Simulation(agent, sumo, int(config['simulation']['max_steps']))
 
@@ -38,14 +41,14 @@ def main_testing():
         plot_data(value, key, model_path, 'testing')
 
 
-def main_training():
+def training():
     config, sumo, traffic_generator = initialize_config('training_config.txt')
 
     nn = Network(int(config['agent']['nb_states']), \
                  int(config['agent']['nb_actions']), \
                  int(config['neural_network']['nb_hidden_layers']), \
                  int(config['neural_network']['width_layers']), \
-               float(config['neural_network']['learning_rate']))
+                 float(config['neural_network']['learning_rate']))
   
     agent = DQNAgent(nn=nn, \
                      discount_rate = float(config['agent']['discount_rate']), \
@@ -60,19 +63,29 @@ def main_training():
   
     for epoch in range(int(config['simulation']['total_episodes'])):
         print('Starting simulation - Episode: {}/{}'.format(epoch+1, config['simulation']['total_episodes']))
+        
         traffic_generator.generate_routefile()
         start_time = timeit.default_timer()
         simulation.run(agent.get_epsilon(epoch)) #get next epsilon and send to simulation
+
         print('Execution time: {:.1f} s\n'.format(timeit.default_timer() - start_time))
         if (epoch+1) % 100 == 0 or (epoch+1) == int(config['simulation']['total_episodes']): #backup
             agent.nn._save_model(model_path)
             for key, value in simulation.get_stats().items():
                 plot_data(value, key, model_path, 'training')
 
-if __name__ == '__main__':
-    op = input('Select option: \n(1) Training (2) Testing ')
-    if op == '1':
-      main_training()
-    elif op == '2':
-      main_testing()
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-m', '--mode',
+                        type=lambda arg: arg.lower(),
+                        choices=['training', 'testing'],
+                        required=True,
+                        help='Supported modes for running the code')
     
+    args = parser.parse_args()
+    eval(f'{args.mode}()')
+
+
+if __name__ == '__main__':
+    main()

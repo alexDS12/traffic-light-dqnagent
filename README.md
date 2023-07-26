@@ -10,29 +10,12 @@ These instructions will get you a copy of the project up and running on your loc
 
 All you will need:
 
-1. TensorFlow and TensorFlow-gpu v2.x.
-2. Keras v2.3.1.
-3. SUMO v1.7.0.
-4. Python v3.7.
-5. TraCI.
+1. TensorFlow v2.x.
+2. SUMO v1.7.0.
+3. Python v3.7.
+4. TraCI.
 
-With Anaconda:
-```
-conda install tensorflow-gpu
-conda install keras
-```
-If using pip:
-```
-pip install --upgrade pip
-pip install tensorflow
-pip install keras
-```
-Or even Colab:
-```
-%tensorflow_version 2.x
-```
-
-Then you can get SUMO [here](https://sumo.dlr.de/docs/Downloads.php) or if using Linux/Colab:
+You can get SUMO [here](https://sumo.dlr.de/docs/Downloads.php) or if using Linux/Colab:
 
 ```
 !sudo add-apt-repository ppa:sumo/stable -y
@@ -75,15 +58,15 @@ discount_rate     = float - Basically to control agent's decision making.
 epochs            = int - How many epochs agent will train and fitting weights.
 ```
 
-Then you can enter the following command inside root folder:
+Then you can enter the following command:
 
 ```
-python main.py
+python main.py --mode training
 ```
 
 If everything goes as planned, code will run and ask whether you want to (1) train a new agent or (2) test an agent.
 
-Every piece of code has it's own docstring, therefore it might be helpful. However, if any questions, please open an issue and I'll gladly help you.
+Every piece of code has it's own docstring, therefore it might be helpful. However, if any questions, please open an issue and I'll try to help you.
 
 When total episodes are reached, total rewards, mean waiting time and mean waiting length will be generated in the path shown in console.
 
@@ -94,7 +77,6 @@ Unfortunately the DQN Agent isn't being used as intended, it isn't following rea
 ## Built With
 
 * [Tensorflow](https://www.tensorflow.org/) - Machine Learning platform
-* [Keras](https://keras.io/) - Deep Learning API
 * [SUMO](https://www.eclipse.org/sumo/) - Traffic simulation package
 * [Python](https://www.python.org/)
 
